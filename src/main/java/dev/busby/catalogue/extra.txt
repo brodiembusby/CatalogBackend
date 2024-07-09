@@ -1,0 +1,19 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+spring:
+  datasource:
+    password: Starwars23!
+    url: jdbc:postgresql://localhost:5432/registration
+    username: postgres
+
+  jpa:
+    # This create-drop is automaticacly destroying database
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+      show-sql: true
