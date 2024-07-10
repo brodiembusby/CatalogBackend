@@ -23,9 +23,9 @@ public class WebSecurityConfig {
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public WebSecurityConfig(UserDetailsService userDetailsService, PasswordEncoder bCryptPasswordEncoder, BCryptPasswordEncoder bCryptPasswordEncoder1) {
+    public WebSecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDetailsService = userDetailsService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder1;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Bean
@@ -47,19 +47,16 @@ public class WebSecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/api/v**/registration/**")
-                            .permitAll();
-                    auth.requestMatchers("/api/v1/cards/**")
-                            .permitAll();
+                    auth.requestMatchers("/api/v1/registration/**").permitAll();
+                    auth.requestMatchers("/api/v1/cards/**").permitAll();
+                    auth.requestMatchers("/api/v1/collections/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
-                //.httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
                 )
                 .build();
     }
-
 
 }

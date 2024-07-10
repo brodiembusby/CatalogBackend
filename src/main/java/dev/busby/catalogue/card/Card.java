@@ -1,4 +1,4 @@
-package dev.busby.catalogue.Card;
+package dev.busby.catalogue.card;
 
 import lombok.Data;
 import lombok.Getter;

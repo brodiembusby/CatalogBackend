@@ -1,6 +1,6 @@
-package dev.busby.catalogue.Review;
+package dev.busby.catalogue.review;
 
-import dev.busby.catalogue.Card.Card;
+import dev.busby.catalogue.card.Card;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;

@@ -1,4 +1,4 @@
-package dev.busby.catalogue.Review;
+package dev.busby.catalogue.review;
 
 
 import lombok.AllArgsConstructor;

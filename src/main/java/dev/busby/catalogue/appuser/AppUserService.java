@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -75,4 +74,5 @@ public class AppUserService implements UserDetailsService {
         Update update = new Update().set("enabled", true);
         return (int) mongoTemplate.updateFirst(query, update, AppUser.class).getModifiedCount();
     }
+
 }

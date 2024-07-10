@@ -57,6 +57,7 @@ public class RegistrationService {
     }
 
     @Transactional
+//    ResponseEntity<String>
     public ResponseEntity<String> confirmToken(String token) {
 
         // For redirection of pages
@@ -69,9 +70,9 @@ public class RegistrationService {
 
         if (confirmationToken.getConfirmedAt() != null) {
             // Send to home page if already confirmed
-            headers.setLocation(URI.create("http://localhost:3000"));
-            return new ResponseEntity<>(headers, HttpStatus.FOUND);
-//            throw new IllegalStateException("already confirmed");
+//            headers.setLocation(URI.create("http://localhost:3000"));
+//            return new ResponseEntity<>(headers, HttpStatus.FOUND);
+            throw new IllegalStateException("already confirmed");
         }
 
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
@@ -85,8 +86,10 @@ public class RegistrationService {
                 confirmationToken.getAppUser().getEmail());
 
         // Send endpoint to frontend
-        headers.setLocation(URI.create("http://localhost:3000/confirmation"));
-        return new ResponseEntity<>(headers, HttpStatus.FOUND);    }
+      headers.setLocation(URI.create("http://localhost:3000/confirmation"));
+      return new ResponseEntity<>(headers, HttpStatus.FOUND);
+//        return "confirmed";
+    };
 
     public String buildEmail(String name, String link) {
         return "<!DOCTYPE html>\n" +

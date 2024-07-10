@@ -1,4 +1,4 @@
-package dev.busby.catalogue.Card;
+package dev.busby.catalogue.card;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
