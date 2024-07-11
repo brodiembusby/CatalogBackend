@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/reviews")
-@CrossOrigin(origins = "http://localhost:3000")
 
 public class ReviewController {
 
@@ -21,7 +20,7 @@ public class ReviewController {
     @PostMapping
     public ResponseEntity<Review> createReview(@RequestBody Map<String, String> payload){
 
-        return new ResponseEntity<Review>(reviewService.createReview(payload.get("reviewBody"), payload.get("Name")), HttpStatus.CREATED);
+        return new ResponseEntity<Review>(reviewService.createReview(payload.get("reviewBody"), payload.get("name")), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

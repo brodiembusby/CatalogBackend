@@ -16,16 +16,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Card {
     @Id
     private ObjectId objectId;
-    private String Name;
-    private String Image;
-    private String Born;
+    private String name;
+    private String image;
+    private String born;
+
     public Card() {}
 
-    public Card(ObjectId objectid, String Name, String Image, String Born){
-        this.objectId = objectid;
-        this.Name = Name;
-        this.Image = Image;
-        this.Born = Born;
+    public Card(ObjectId objectId, String name, String image, String born){
+        this.objectId = objectId;
+        this.name = name;
+        this.image = image;
+        this.born = born;
     }
 
 }

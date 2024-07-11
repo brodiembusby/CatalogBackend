@@ -24,15 +24,12 @@ public class ReviewService {
 
         // Find reviewIds in MongoDB then add a new field to it ours is an array
         mongoTemplate.update(Card.class)
-                .matching(Criteria.where("Name").is(name))
-                .apply(new Update().push("reviewIds").value(review.getId()))
-                .first();
+                .matching(Criteria.where("name").is(name))
+                .apply(new Update().push("reviewIds").value(review.getId()));
 
         return review;
     }
 
-
-    // May return null hence Optional
     public Optional<Review> getReview(ObjectId id){
         return reviewRepository.findById(id);
     }
