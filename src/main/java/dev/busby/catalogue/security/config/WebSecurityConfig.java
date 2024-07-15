@@ -41,25 +41,25 @@ public class WebSecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-    // Api cards should be public for all registration has to be protected.
+    // Api collectibles should be public for all registration has to be protected.
     @Bean
     public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/api/v1/registration/**").permitAll();
-                    auth.requestMatchers("/api/v1/cards/**").permitAll();
-                    auth.requestMatchers("/api/v1/collections/**").permitAll();
+                    auth.requestMatchers("/api/v1/collectibles/**").permitAll();
+                    auth.requestMatchers("/api/v1/piles/**").permitAll();
                     auth.requestMatchers("/api/v1/reviews/**").permitAll();
 
                     auth.anyRequest().authenticated();
                 })
-                .formLogin(withDefaults())
+//                .formLogin(withDefaults())
 
-//              .formLogin(form -> form
-//                        .loginPage("/login")
-//                        .permitAll()
-//                )
+              .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
                 .build();
     }
 

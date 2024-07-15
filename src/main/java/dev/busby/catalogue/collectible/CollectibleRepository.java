@@ -1,4 +1,4 @@
-package dev.busby.catalogue.card;
+package dev.busby.catalogue.collectible;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -9,7 +9,7 @@ import java.util.Optional;
 // Talks to the physical database This layer interacts with the database. It contains
 // methods for performing CRUD (Create, Read, Update, Delete) operations
 @Repository
-public interface CardRepository extends MongoRepository<Card, ObjectId> {
+public interface CollectibleRepository extends MongoRepository<Collectible, ObjectId> {
 
-    Optional<Card> findByName(String name);
+    Optional<Collectible> findByName(String name);
 }

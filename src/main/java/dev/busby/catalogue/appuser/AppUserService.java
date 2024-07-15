@@ -53,7 +53,6 @@ public class AppUserService implements UserDetailsService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.confirmationTokenService = confirmationTokenService;
         this.mongoTemplate = mongoTemplate;
-//        this.authenticationManager = authenticationManager;
     }
 
     @Override

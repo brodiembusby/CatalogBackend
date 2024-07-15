@@ -34,9 +34,9 @@ public class MongoDbInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Drop only the collections related to registration
+        // Drop only the piles related to registration
         mongoTemplate.dropCollection("appUser");
         mongoTemplate.dropCollection("confirmationToken");
-        // Add more collections if needed
+        // Add more piles if needed
     }
 }
