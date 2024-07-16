@@ -39,15 +39,12 @@ public class AppUserService implements UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
     private final MongoTemplate mongoTemplate;
-    // THis probably cause problems
-//    private final AuthenticationManager authenticationManager;
 
     @Autowired
     public AppUserService(AppUserRepository appUserRepository,
                           BCryptPasswordEncoder bCryptPasswordEncoder,
                           ConfirmationTokenService confirmationTokenService,
                           MongoTemplate mongoTemplate
-//                          AuthenticationManager authenticationManager
                           ) {
         this.appUserRepository = appUserRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -69,7 +66,6 @@ public class AppUserService implements UserDetailsService {
         if (userExists) {
             // TODO check if attributes are the same and
             // TODO: if email not confirmed send confirmation email.
-
             throw new IllegalStateException("Email already taken");
         }
 
@@ -96,36 +92,5 @@ public class AppUserService implements UserDetailsService {
         return (int) mongoTemplate.updateFirst(query, update, AppUser.class).getModifiedCount();
     }
 
-//    @PostMapping("/api/v1/auth/signin")
-//    public ResponseEntity<?> signin(@RequestBody LoginRequest loginRequest) {
-//        try {
-//            Authentication authentication = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(
-//                            loginRequest.getEmail(), loginRequest.getPassword()
-//                    )
-//            );
-//
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//            AuthResponse authResponse = new AuthResponse();
-//            authResponse.setMessage("User authenticated successfully");
-//
-//            return new ResponseEntity<>(authResponse, HttpStatus.OK);
-//        } catch (AuthenticationException e) {
-//            return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
-//        }
-//    }
-//    @Getter
-//    @Setter
-//    static class LoginRequest {
-//        private String email;
-//        private String password;
-//
-//    }
-//    @Getter
-//    @Setter
-//    static class AuthResponse {
-//        private String message;
-//
-//    }
+
 }

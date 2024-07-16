@@ -66,10 +66,8 @@ public class RegistrationService {
                         new IllegalStateException("token not found"));
 
         if (confirmationToken.getConfirmedAt() != null) {
-            // Send to home page if already confirmed
             headers.setLocation(URI.create("http://localhost:3000"));
             return new ResponseEntity<>(headers, HttpStatus.FOUND);
-//            throw new IllegalStateException("already confirmed");
         }
 
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();

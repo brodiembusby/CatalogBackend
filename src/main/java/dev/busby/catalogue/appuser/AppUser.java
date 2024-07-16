@@ -24,18 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class AppUser implements UserDetails {
-//public class AppUser{
 
-//    @SequenceGenerator(
-//            name = "student_sequence",
-//            sequenceName = "student_sequence",
-//            allocationSize = 1
-//    )
-//    @Id
-//    @GeneratedValue(
-//        strategy = GenerationType.SEQUENCE,
-//        generator = "student_sequence"
-//    )
     @Id
     private String id;
     private String firstName;
