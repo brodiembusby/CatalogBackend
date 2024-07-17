@@ -27,7 +27,8 @@ public class PileController {
     public  ResponseEntity<Optional<Pile>> getPile(@PathVariable ObjectId id){
         return new ResponseEntity<Optional<Pile>>(pileService.getPile(id), HttpStatus.OK);
     }
-    @GetMapping
+    // Might not work because there are none. It works
+    @GetMapping("/all")
     public ResponseEntity<List<Pile>> allPiles() {
         return new ResponseEntity<>(pileService.allPiles(), HttpStatus.OK);
     }
