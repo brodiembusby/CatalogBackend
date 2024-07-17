@@ -38,7 +38,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/api/v1/registration/**").permitAll();
                     auth.requestMatchers("/api/v1/auth/**").permitAll();
-//                    auth.requestMatchers("/api/v1/collectibles/**").permitAll();
+                    auth.requestMatchers("/api/v1/collectibles/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
 //                .formLogin(form -> form.disable())

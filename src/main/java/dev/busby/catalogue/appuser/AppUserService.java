@@ -16,7 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+
+import static dev.busby.catalogue.appuser.AppUserRole.ADMIN;
 
 @RestController
 @Service
@@ -80,6 +83,19 @@ public class AppUserService implements UserDetailsService {
         Update update = new Update().set("enabled", true);
         return (int) mongoTemplate.updateFirst(query, update, AppUser.class).getModifiedCount();
     }
+    @Autowired
+    public List<AppUser> allUsers(){
+        return appUserRepository.findAll();
+    }
+
+//
+//    @Transactional
+//    public int enableAdmin(String email) {
+//        Query query = new Query(Criteria.where("email").is(email));
+//        Update update = new Update().set("appUserRole", ADMIN);
+//        return (int) mongoTemplate.updateFirst(query, update, AppUser.class).getModifiedCount();
+//    }
+
 
 
 }
