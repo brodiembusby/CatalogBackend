@@ -1,4 +1,4 @@
-package dev.busby.catalogue.registration.authentication;
+package dev.busby.catalogue.security.authentication;
 
 public class AuthResponse {
 
