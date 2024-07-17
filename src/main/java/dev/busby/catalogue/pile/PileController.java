@@ -2,7 +2,6 @@ package dev.busby.catalogue.pile;
 
 import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.appuser.AppUserRepository;
-import dev.busby.catalogue.review.Review;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

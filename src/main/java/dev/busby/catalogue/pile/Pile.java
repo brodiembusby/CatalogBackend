@@ -1,6 +1,5 @@
 package dev.busby.catalogue.pile;
 
-import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.collectible.Collectible;
 import lombok.Getter;
 import lombok.Setter;

@@ -26,9 +26,7 @@ public class PileService {
         this.collectibleRepository = collectibleRepository;
         this.appUserRepository = appUserRepository;
     }
-//    public Optional<Review> getReview(ObjectId id){
-//        return reviewRepository.findById(id);
-//    }
+
     public Optional<Pile> getPile(ObjectId id) { return pileRepository.findById(id); }
     public List<Pile> allPiles() { return pileRepository.findAll(); }
 

@@ -1,6 +1,5 @@
 package dev.busby.catalogue.review;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
