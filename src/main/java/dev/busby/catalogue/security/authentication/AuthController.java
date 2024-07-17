@@ -35,9 +35,9 @@ public class AuthController {
                 loginRequest.getEmail());
         final String jwt = jwtUtil.generateToken(String.valueOf(userDetails.getEmail()));
 
-//        String role = userDetails.getAuthorities().toString();
+        String role = userDetails.getAuthorities().toString();
 
-        return ResponseEntity.ok(new AuthResponse(jwt));
+        return ResponseEntity.ok(new AuthResponse(jwt, role));
 
     }
 }
