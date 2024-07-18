@@ -34,9 +34,10 @@ import org.springframework.stereotype.Component;
 //
 //    @Override
 //    public void run(String... args) throws Exception {
-//        // Drop only the piles related to registration
+//        // Drop only the collections related to registration
 //        mongoTemplate.dropCollection("appUser");
 //        mongoTemplate.dropCollection("confirmationToken");
-//        // Add more piles if needed
+//        mongoTemplate.dropCollection("piles");
+//        mongoTemplate.dropCollection("reviews");
 //    }
 //}

@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface PileRepository extends MongoRepository<Pile, ObjectId> {
-    Optional<Object> findById(String pileId);
-
+    Optional<Pile> findById(String pileId);
 }

@@ -16,15 +16,15 @@ public class Pile {
 
     @Id
     private ObjectId id;
-    private List<Collectible> collectibleArr; // Use List instead of array
-    private String appUserId; // Store AppUser's id instead of the whole object
+    private List<Collectible> collectibleArr;
+    private String appUserEmail;
     private String name;
     private String image;
 
-    public Pile(String image, String name, String appUserId, List<Collectible> collectibleArr) {
+    public Pile(String image, String name, String appUserEmail, List<Collectible> collectibleArr) {
         this.image = image;
         this.name = name;
-        this.appUserId = appUserId;
+        this.appUserEmail = appUserEmail;
         this.collectibleArr = collectibleArr;
     }
 }

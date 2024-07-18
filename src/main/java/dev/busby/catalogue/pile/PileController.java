@@ -3,6 +3,7 @@ package dev.busby.catalogue.pile;
 import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.appuser.AppUserRepository;
 import org.bson.types.ObjectId;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1/piles")
@@ -27,20 +29,20 @@ public class PileController {
     public  ResponseEntity<Optional<Pile>> getPile(@PathVariable ObjectId id){
         return new ResponseEntity<Optional<Pile>>(pileService.getPile(id), HttpStatus.OK);
     }
-    // Might not work because there are none. It works
     @GetMapping("/all")
     public ResponseEntity<List<Pile>> allPiles() {
         return new ResponseEntity<>(pileService.allPiles(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Pile> createPile(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<Pile> createPile(@RequestBody Map<String, String> payload) throws Exception {
 
         String image = payload.get("image");
         String name = payload.get("name");
-        String appUserId = payload.get("appUserId");
+        String appUserEmail = payload.get("email");
 
-        AppUser appUser = appUserRepository.findById(appUserId).orElseThrow(() -> new RuntimeException("User not found"));
+        AppUser appUser = appUserRepository.findByEmail(appUserEmail)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         Pile pile = pileService.createPile(image, name, appUser);
         return new ResponseEntity<>(pile, HttpStatus.CREATED);

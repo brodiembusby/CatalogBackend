@@ -2,10 +2,12 @@ package dev.busby.catalogue.pile;
 import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.appuser.AppUserRepository;
 import dev.busby.catalogue.collectible.CollectibleRepository;
-import dev.busby.catalogue.review.Review;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,14 +31,22 @@ public class PileService {
 
     public Optional<Pile> getPile(ObjectId id) { return pileRepository.findById(id); }
     public List<Pile> allPiles() { return pileRepository.findAll(); }
+    public Pile createPile(String image, String name, AppUser appUser) throws Exception {
 
-    public Pile createPile(String image, String name, AppUser appUser) {
-        Pile pile = new Pile(image, name, appUser.getId(), new ArrayList<>());
-        Pile savedPile = pileRepository.save(pile);
-        appUser.getPilesArr().add(savedPile);
-        appUserRepository.save(appUser);
+        // Insert the new pile into the MongoDB
+        Pile pile = pileRepository.insert(new Pile(image, name, appUser.getEmail(), new ArrayList<>()));
+        if(pileRepository.equals(name)){
+            throw new Exception("Pile Name already exists.");
+        }
+        // Update the AppUser document by adding the new pile's ID to the pilesArr
+        mongoTemplate.update(AppUser.class)
+                .matching(Criteria.where("email").is(appUser.getEmail()))
+                .apply(new Update().push("pilesArr").value(pile.getId()))
+                .first();
 
-        return savedPile;
+
+        return pile;
     }
+
 
 }

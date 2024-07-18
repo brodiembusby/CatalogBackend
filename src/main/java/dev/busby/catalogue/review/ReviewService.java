@@ -25,8 +25,8 @@ public class ReviewService {
         // Find reviewIds in MongoDB then add a new field to it ours is an array
         mongoTemplate.update(Collectible.class)
                 .matching(Criteria.where("name").is(name))
-                .apply(new Update().push("reviewIds").value(review.getId()));
-
+                .apply(new Update().push("reviewIds").value(review.getId()))
+                .first();
         return review;
     }
 

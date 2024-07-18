@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import org.bson.types.ObjectId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,21 +36,22 @@ public class AppUser implements UserDetails {
     private AppUserRole appUserRole;
     private Boolean locked = false;
     private Boolean enabled = false;
-    private List<Pile> pilesArr; // Use List instead of array for better handling in MongoDB
+    private List<ObjectId> pilesArr; // Use List instead of array for better handling in MongoDB
 
 
-    public AppUser(String firstName,
-                   String lastName,
-                   String email,
-                   String password,
-                   AppUserRole appUserRole) {
+    // Constructor with pilesArr parameter
+    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole, List<ObjectId> pilesArr) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.appUserRole = appUserRole;
-        this.pilesArr = new ArrayList<>();
+        this.pilesArr = pilesArr != null ? pilesArr : new ArrayList<>();
+    }
 
+    // Constructor without pilesArr parameter
+    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
+        this(firstName, lastName, email, password, appUserRole, new ArrayList<>());
     }
 
     @Override
@@ -58,10 +60,12 @@ public class AppUser implements UserDetails {
                 new SimpleGrantedAuthority(appUserRole.name());
         return Collections.singletonList(authority);
     }
-    public List<Pile> getPilesArr() {
+    public List<ObjectId> getPilesArr() {
         return pilesArr;
     }
-
+    <Optional> String getId(){
+        return id;
+    }
     @Override
     public String getPassword() {
         return password;
