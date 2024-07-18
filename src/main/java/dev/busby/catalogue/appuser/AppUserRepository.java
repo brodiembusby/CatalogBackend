@@ -8,7 +8,6 @@ import java.util.Optional;
 @Repository
 public interface AppUserRepository extends MongoRepository<AppUser, String> {
 
-    // This will create the MongoDB query
     Optional<AppUser> findByEmail(String email);
 
 }

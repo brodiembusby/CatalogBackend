@@ -8,4 +8,6 @@ import java.util.Optional;
 @Repository
 public interface PileRepository extends MongoRepository<Pile, ObjectId> {
     Optional<Pile> findById(String pileId);
+    Optional<Pile> findByName(String pileId);
+
 }

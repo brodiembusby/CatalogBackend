@@ -54,17 +54,17 @@ public class CollectibleService{
 //        pileRepository.save(pile);
 //        return savedCollectible;
 //    }
-//public Collectible createCollectible(String image, String name, Pile pile, String description) {
-//    // Insert the new collectible into the MongoDB
-//    Collectible collectible = collectibleRepository.insert(new Collectible(pile.getId(), name, image, description));
-//
-//    // Update the Pile document by adding the new collectible's ID to the collectibleArr
-//    mongoTemplate.update(Pile.class)
-//            .matching(Criteria.where("_id").is(pile.getId()))
-//            .apply(new Update().push("collectibleArr").value(collectible.getId()))
-//            .first();
-//
-//    return collectible;
-//}
+public Collectible createCollectible(String image, String name, Pile pile, String description) {
+    // Insert the new collectible into the MongoDB
+    Collectible collectible = collectibleRepository.insert(new Collectible(pile.getId(), name, image, description));
+
+    // Update the Pile document by adding the new collectible's ID to the collectibleArr
+    mongoTemplate.update(Pile.class)
+            .matching(Criteria.where("_id").is(pile.getId()))
+            .apply(new Update().push("collectibleArr").value(collectible.getId()))
+            .first();
+
+    return collectible;
+}
 
 }
