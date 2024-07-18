@@ -46,14 +46,6 @@ public class CollectibleService{
         return collectibleRepository.findByName(name);
     }
 
-//    // Create a collectible tied to a pile
-//    public Collectible createCollectible(String image, String name, Pile pile, String description) {
-//        Collectible collectible = new Collectible(pile.getId(), name, image, description);
-//        Collectible savedCollectible = collectibleRepository.save(collectible);
-//        pile.getCollectibleArr().add(savedCollectible);
-//        pileRepository.save(pile);
-//        return savedCollectible;
-//    }
 public Collectible createCollectible(String image, String name, Pile pile, String description) {
     // Insert the new collectible into the MongoDB
     Collectible collectible = collectibleRepository.insert(new Collectible(pile.getId(), name, image, description));
