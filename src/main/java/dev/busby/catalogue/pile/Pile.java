@@ -1,6 +1,6 @@
 package dev.busby.catalogue.pile;
 
-//import dev.busby.catalogue.collectible.Collectible;
+import dev.busby.catalogue.collectible.Collectible;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
@@ -16,7 +16,7 @@ public class Pile {
 
     @Id
     private ObjectId id;
-//    private List<Collectible> collectibleArr;
+    private List<Collectible> collectibleArr;
     private String userId;
     private String name;
     private String image;
@@ -25,6 +25,6 @@ public class Pile {
         this.image = image;
         this.name = name;
         this.userId = userId;
-//        this.collectibleArr = collectibleArr;
+        this.collectibleArr = collectibleArr;
     }
 }

@@ -1,6 +1,7 @@
 package dev.busby.catalogue.pile;
 import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.appuser.AppUserRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PileService {
@@ -24,7 +26,12 @@ public class PileService {
         this.mongoTemplate = mongoTemplate;
         this.appUserRepository = appUserRepository;
     }
-
+    public List<Pile> getAllPilesByUserId(String userId) {
+        return pileRepository.findAllByUserId(userId);
+    }
+    public Optional<Pile> getPileById(ObjectId id){
+        return pileRepository.findById(id);
+    }
     public Pile createPile(String image, String name, AppUser appUser) throws Exception {
         Pile pile = pileRepository.insert(new Pile(image, name, appUser.getId()));
 
@@ -38,8 +45,6 @@ public class PileService {
         return pile;
     }
 
-    public List<Pile> getAllPilesByUserId(String userId) {
-        return pileRepository.findAllByUserId(userId);
-    }
+
 
 }
