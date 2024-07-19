@@ -1,7 +1,7 @@
 package dev.busby.catalogue.pile;
 import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.appuser.AppUserRepository;
-import dev.busby.catalogue.collectible.CollectibleRepository;
+//import dev.busby.catalogue.collectible.CollectibleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,22 +16,22 @@ public class PileService {
 
     @Autowired
     private final PileRepository pileRepository;
-    @Autowired
-    private final CollectibleRepository collectibleRepository;
+//    @Autowired
+//    private final CollectibleRepository collectibleRepository;
     @Autowired
     private final MongoTemplate mongoTemplate;
     @Autowired
     private final AppUserRepository appUserRepository;
     @Autowired
-    public PileService(CollectibleRepository collectibleRepository, PileRepository pileRepository, MongoTemplate mongoTemplate, AppUserRepository appUserRepository) {
+    public PileService( PileRepository pileRepository, MongoTemplate mongoTemplate, AppUserRepository appUserRepository) {
         this.pileRepository = pileRepository;
         this.mongoTemplate = mongoTemplate;
-        this.collectibleRepository = collectibleRepository;
+//        this.collectibleRepository = collectibleRepository;
         this.appUserRepository = appUserRepository;
     }
 
     public Pile createPile(String image, String name, AppUser appUser) throws Exception {
-        Pile pile = pileRepository.insert(new Pile(image, name, appUser.getId(), new ArrayList<>()));
+        Pile pile = pileRepository.insert(new Pile(image, name, appUser.getId()));
 
         if (pileRepository.equals(name)) {
             throw new Exception("Pile Name already exists.");
