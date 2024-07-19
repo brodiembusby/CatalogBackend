@@ -1,5 +1,7 @@
 package dev.busby.catalogue.appuser;
 
+//import dev.busby.catalogue.review.Review;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -17,16 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
-
-import static dev.busby.catalogue.appuser.AppUserRole.ADMIN;
 
 @RestController
 @Service
 public class AppUserService implements UserDetailsService {
 
     private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
-
+    @Autowired
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
@@ -51,6 +52,9 @@ public class AppUserService implements UserDetailsService {
                         new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
+    public Optional<AppUser> getUser(String email){
+        return appUserRepository.findByEmail(email);
+    }
 
     public String signUpUser(AppUser appUser) {
         boolean userExists = appUserRepository.findByEmail(appUser.getEmail()).isPresent();

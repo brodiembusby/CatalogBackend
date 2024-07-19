@@ -38,6 +38,10 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/api/v1/registration/**").permitAll();
                     auth.requestMatchers("/api/v1/auth/**").permitAll();
                     auth.requestMatchers("/api/v1/cards/**").permitAll();
+                    auth.requestMatchers("/api/v1/user/**").permitAll();
+
+                    auth.requestMatchers("/api/v1/piles/**").permitAll();
+                    auth.requestMatchers("/api/v1/collectibles/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

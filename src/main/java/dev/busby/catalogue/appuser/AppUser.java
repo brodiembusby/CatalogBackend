@@ -63,7 +63,7 @@ public class AppUser implements UserDetails {
     public List<ObjectId> getPilesArr() {
         return pilesArr;
     }
-    <Optional> String getId(){
+    public String getId(){
         return id;
     }
     @Override

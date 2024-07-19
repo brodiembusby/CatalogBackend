@@ -2,8 +2,7 @@ package dev.busby.catalogue.pile;
 
 import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.appuser.AppUserRepository;
-import org.bson.types.ObjectId;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1/piles")
@@ -24,14 +21,9 @@ public class PileController {
     @Autowired
     private AppUserRepository appUserRepository;
 
-    /* All Getters  */
-    @GetMapping("/{id}")
-    public  ResponseEntity<Optional<Pile>> getPile(@PathVariable ObjectId id){
-        return new ResponseEntity<Optional<Pile>>(pileService.getPile(id), HttpStatus.OK);
-    }
-    @GetMapping("/all")
-    public ResponseEntity<List<Pile>> allPiles() {
-        return new ResponseEntity<>(pileService.allPiles(), HttpStatus.OK);
+    @GetMapping("/{userId}")
+    public List<Pile> getPilesByUserId(@PathVariable String userId) {
+        return pileService.getAllPilesByUserId(userId);
     }
 
     @PostMapping
@@ -39,9 +31,9 @@ public class PileController {
 
         String image = payload.get("image");
         String name = payload.get("name");
-        String appUserEmail = payload.get("email");
+        String appUserEmail = payload.get("userId");
 
-        AppUser appUser = appUserRepository.findByEmail(appUserEmail)
+        AppUser appUser = appUserRepository.findById(appUserEmail)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Pile pile = pileService.createPile(image, name, appUser);

@@ -46,9 +46,9 @@ public class CollectibleService{
         return collectibleRepository.findByName(name);
     }
 
-public Collectible createCollectible(String image, String name, Pile pile, String description) {
+public Collectible createCollectible(String image, String collectibleName, Pile pile, String description) {
     // Insert the new collectible into the MongoDB
-    Collectible collectible = collectibleRepository.insert(new Collectible(pile.getId(), name, image, description));
+    Collectible collectible = collectibleRepository.insert(new Collectible(pile.getId(), collectibleName, image, description));
 
     // Update the Pile document by adding the new collectible's ID to the collectibleArr
     mongoTemplate.update(Pile.class)

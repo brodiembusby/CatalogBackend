@@ -17,14 +17,14 @@ public class Pile {
     @Id
     private ObjectId id;
     private List<Collectible> collectibleArr;
-    private String appUserEmail;
+    private String userId;
     private String name;
     private String image;
 
-    public Pile(String image, String name, String appUserEmail, List<Collectible> collectibleArr) {
+    public Pile(String image, String name, String userId, List<Collectible> collectibleArr) {
         this.image = image;
         this.name = name;
-        this.appUserEmail = appUserEmail;
+        this.userId = userId;
         this.collectibleArr = collectibleArr;
     }
 }

@@ -48,15 +48,17 @@ public class CollectibleController {
     /* Postings for collectibles tied to a pile */
     @PostMapping
     public ResponseEntity<Collectible> createCollectible(@RequestBody Map<String, String> payload) {
-        String image = payload.get("image");
-        String name = payload.get("name");
-        String description = payload.get("description");
-        String appUserEmail = payload.get("appUserEmail");
 
-        Pile pile = pileRepository.findByName(name)
+        String image = payload.get("image");
+        String pileName = payload.get("pileName");
+
+        String description = payload.get("description");
+        String collectibleName = payload.get("collectibleName");
+
+        Pile pile = pileRepository.findByName(pileName)
                 .orElseThrow(() -> new RuntimeException("Pile not found"));
 
-        Collectible collectible = collectibleService.createCollectible(image, name, pile, description);
+        Collectible collectible = collectibleService.createCollectible(image, collectibleName, pile, description);
         return new ResponseEntity<>(collectible, HttpStatus.CREATED);
     }
 
