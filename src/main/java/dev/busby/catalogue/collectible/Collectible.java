@@ -6,9 +6,7 @@ import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-//This layer represents the data structure.
-// It contains entity classes that are mapped to database piles.
-// The physical data
+
 @Getter
 @Setter
 @Data
@@ -22,7 +20,6 @@ public class Collectible {
     private String image;
     private String description;
 
-    // Collectible Tied to a collection
     public Collectible(ObjectId pileId, String name, String image, String description){
         this.pileId = pileId;
         this.name = name;
@@ -30,4 +27,6 @@ public class Collectible {
         this.description = description;
     }
 
+    // Default constructor for deserialization
+    public Collectible() {}
 }

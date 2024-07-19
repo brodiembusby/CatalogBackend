@@ -13,7 +13,5 @@ public interface PileRepository extends MongoRepository<Pile, ObjectId> {
 //    List<Pile> findByUserId(String userId);
     Optional<Pile> findByName(String pileId);
 //    Optional<Pile> findById(ObjectId id);
-//    Optional<List<Pile>> findAllyId(ObjectId id);
 
-//    Optional<List<Pile>> findAll(ObjectId id);
 }

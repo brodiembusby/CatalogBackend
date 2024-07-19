@@ -1,14 +1,12 @@
 package dev.busby.catalogue.pile;
 import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.appuser.AppUserRepository;
-//import dev.busby.catalogue.collectible.CollectibleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,17 +14,14 @@ public class PileService {
 
     @Autowired
     private final PileRepository pileRepository;
-//    @Autowired
-//    private final CollectibleRepository collectibleRepository;
     @Autowired
     private final MongoTemplate mongoTemplate;
     @Autowired
     private final AppUserRepository appUserRepository;
-    @Autowired
+
     public PileService( PileRepository pileRepository, MongoTemplate mongoTemplate, AppUserRepository appUserRepository) {
         this.pileRepository = pileRepository;
         this.mongoTemplate = mongoTemplate;
-//        this.collectibleRepository = collectibleRepository;
         this.appUserRepository = appUserRepository;
     }
 
