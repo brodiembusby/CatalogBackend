@@ -52,14 +52,14 @@ public class PileService {
     }
     public Card addCardToPile(String pileId, String cardId) throws Exception {
         // Validate and convert the IDs
-        if (!ObjectId.isValid(pileId) || !ObjectId.isValid(cardId)) {
+        if (!ObjectId.isValid(pileId)) {
             throw new IllegalArgumentException("Invalid ObjectId format");
         }
 
         ObjectId pileObjectId = new ObjectId(pileId);
-        ObjectId cardObjectId = new ObjectId(cardId);
 
-        Card card = cardRepository.findById(cardObjectId)
+        System.out.println(cardId);
+        Card card = cardRepository.findByName(cardId)
                 .orElseThrow(() -> new RuntimeException("Card not found"));
 
         // Add card to pile's cardArr list
@@ -75,6 +75,11 @@ public class PileService {
         return pileRepository.findById(id);
     }
 
-
-
+    public Optional<Pile> getPileByName(String name) {
+        return pileRepository.findByName(name);
+    }
+    public Optional<ObjectId> getPileIdByUserIdAndName(String userId, String pileName) {
+        Optional<Pile> pile = pileRepository.findByUserIdAndName(userId, pileName);
+        return pile.map(Pile::getId);
+    }
 }
