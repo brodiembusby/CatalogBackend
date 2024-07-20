@@ -3,7 +3,7 @@ package dev.busby.catalogue.pile;
 import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.appuser.AppUserRepository;
 
-import org.bson.types.ObjectId;
+import dev.busby.catalogue.card.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/piles")
@@ -28,11 +27,6 @@ public class PileController {
         return pileService.getAllPilesByUserId(userId);
     }
 
-    @GetMapping("/single/{id}")
-    public Optional<Pile> getPileById(@PathVariable ObjectId id){
-        return pileService.getPileById(id);
-    }
-
     @PostMapping
     public ResponseEntity<Pile> createPile(@RequestBody Map<String, String> payload) throws Exception {
 
@@ -45,6 +39,15 @@ public class PileController {
 
         Pile pile = pileService.createPile(image, name, appUser);
         return new ResponseEntity<>(pile, HttpStatus.CREATED);
+    }
+    @PostMapping("/{pileId}/cards")
+    public ResponseEntity<Card> addCardToPile(@PathVariable String pileId, @RequestBody Map<String, String> payload) throws Exception {
+        String name = payload.get("name");
+        String image = payload.get("image");
+        String description = payload.get("description");
+
+        Card card = pileService.addCardToPile(pileId, name, image, description);
+        return new ResponseEntity<>(card, HttpStatus.CREATED);
     }
 
 

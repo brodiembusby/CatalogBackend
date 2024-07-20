@@ -7,16 +7,13 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CollectibleService {
+
     @Autowired
     private final CollectibleRepository collectibleRepository;
-    @Autowired
     private final MongoTemplate mongoTemplate;
 
     public CollectibleService(CollectibleRepository collectibleRepository, MongoTemplate mongoTemplate) {
@@ -28,9 +25,7 @@ public class CollectibleService {
         return collectibleRepository.findById(id);
     }
 
-    public List<Collectible> getAllUserbyId(ObjectId Id) {
-        return collectibleRepository.findAllById(Id);
-    }
+
     public Collectible createCollectible(String image, String collectibleName, Pile pile, String description) {
         Collectible collectible = collectibleRepository.insert(new Collectible(pile.getId(), collectibleName, image, description));
         mongoTemplate.update(Pile.class)

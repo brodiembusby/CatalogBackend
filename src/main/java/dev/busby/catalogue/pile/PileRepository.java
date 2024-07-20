@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface PileRepository extends MongoRepository<Pile, ObjectId> {
       List<Pile> findAllByUserId(String userId);
-      Optional<Pile> findById(ObjectId id);
+
 }

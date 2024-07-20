@@ -15,14 +15,14 @@ public class Card {
     private ObjectId objectId;
     private String name;
     private String image;
-    private String born;
+    private String description;
     public Card() {}
 
-    public Card(ObjectId objectId, String name, String image, String born){
+    public Card(ObjectId objectId, String name, String image, String description){
         this.objectId = objectId;
         this.name = name;
         this.image = image;
-        this.born = born;
+        this.description = description;
     }
 
 }

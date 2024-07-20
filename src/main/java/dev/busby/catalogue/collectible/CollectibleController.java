@@ -27,11 +27,6 @@ public class CollectibleController {
         return new ResponseEntity<>(collectibleService.getCollectible(id), HttpStatus.OK);
     }
 
-    @GetMapping("/single/{pileId}")
-    public List<Collectible> getCollectibleById(@PathVariable ObjectId id) {
-        return collectibleService.getAllUserbyId(id);
-    }
-
     @PostMapping
     public ResponseEntity<Collectible> createCollectible(@RequestBody Map<String, String> payload) {
         String image = payload.get("image");

@@ -1,12 +1,13 @@
 package dev.busby.catalogue.pile;
 
-import dev.busby.catalogue.collectible.Collectible;
+import dev.busby.catalogue.card.Card;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -16,7 +17,7 @@ public class Pile {
 
     @Id
     private ObjectId id;
-    private List<Collectible> collectibleArr;
+    private List<Card> cardArr;
     private String userId;
     private String name;
     private String image;
@@ -25,6 +26,6 @@ public class Pile {
         this.image = image;
         this.name = name;
         this.userId = userId;
-        this.collectibleArr = collectibleArr;
+        this.cardArr = new ArrayList<>();  // Initialize the card list here
     }
 }

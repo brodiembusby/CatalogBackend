@@ -36,23 +36,17 @@ public class AppUser implements UserDetails {
     private AppUserRole appUserRole;
     private Boolean locked = false;
     private Boolean enabled = false;
-    private List<ObjectId> pilesArr; // Use List instead of array for better handling in MongoDB
 
 
     // Constructor with pilesArr parameter
-    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole, List<ObjectId> pilesArr) {
+    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.appUserRole = appUserRole;
-        this.pilesArr = pilesArr != null ? pilesArr : new ArrayList<>();
     }
 
-    // Constructor without pilesArr parameter
-    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
-        this(firstName, lastName, email, password, appUserRole, new ArrayList<>());
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,9 +54,7 @@ public class AppUser implements UserDetails {
                 new SimpleGrantedAuthority(appUserRole.name());
         return Collections.singletonList(authority);
     }
-    public List<ObjectId> getPilesArr() {
-        return pilesArr;
-    }
+
     public String getId(){
         return id;
     }
