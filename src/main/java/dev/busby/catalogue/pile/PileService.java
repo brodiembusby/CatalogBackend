@@ -2,6 +2,7 @@ package dev.busby.catalogue.pile;
 import dev.busby.catalogue.appuser.AppUser;
 import dev.busby.catalogue.appuser.AppUserRepository;
 import dev.busby.catalogue.card.Card;
+import dev.busby.catalogue.card.CardRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -22,10 +23,14 @@ public class PileService {
     @Autowired
     private final AppUserRepository appUserRepository;
 
-    public PileService( PileRepository pileRepository, MongoTemplate mongoTemplate, AppUserRepository appUserRepository) {
+    @Autowired
+    private final CardRepository cardRepository;
+
+    public PileService(PileRepository pileRepository, MongoTemplate mongoTemplate, AppUserRepository appUserRepository, CardRepository cardRepository) {
         this.pileRepository = pileRepository;
         this.mongoTemplate = mongoTemplate;
         this.appUserRepository = appUserRepository;
+        this.cardRepository = cardRepository;
     }
     public List<Pile> getAllPilesByUserId(String userId) {
         return pileRepository.findAllByUserId(userId);
@@ -45,17 +50,31 @@ public class PileService {
                 .first();
         return pile;
     }
-    public Card addCardToPile(String pileId, String name, String image, String description) throws Exception {
-        Card card = new Card(new ObjectId(), name, image, description);
+    public Card addCardToPile(String pileId, String cardId) throws Exception {
+        // Validate and convert the IDs
+        if (!ObjectId.isValid(pileId) || !ObjectId.isValid(cardId)) {
+            throw new IllegalArgumentException("Invalid ObjectId format");
+        }
+
+        ObjectId pileObjectId = new ObjectId(pileId);
+        ObjectId cardObjectId = new ObjectId(cardId);
+
+        Card card = cardRepository.findById(cardObjectId)
+                .orElseThrow(() -> new RuntimeException("Card not found"));
 
         // Add card to pile's cardArr list
         mongoTemplate.update(Pile.class)
-                .matching(Criteria.where("_id").is(new ObjectId(pileId)))
+                .matching(Criteria.where("_id").is(pileObjectId))
                 .apply(new Update().push("cardArr").value(card))
                 .first();
 
         return card;
     }
+
+    public Optional<Pile> getPile(ObjectId id){
+        return pileRepository.findById(id);
+    }
+
 
 
 }
