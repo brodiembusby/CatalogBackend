@@ -32,7 +32,8 @@ https://www.postman.com/
 mail.dev
 
 
-### Ports for running
-#### Frontend: http://localhost:3000 [FrontEnd Link Repo]( https://github.com/brodiembusby/Catalogue)
+### Github Links
+#### Frontend: [FrontEnd Link Repo]( https://github.com/brodiembusby/Catalogue)
 
-#### Backend: http://localhost:8080 [BackEnd Link Repo]( https://github.com/brodiembusby/CatalogBackend)
+#### Backend: [BackEnd Link Repo]( https://github.com/brodiembusby/CatalogBackend)
+
